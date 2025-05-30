@@ -1,3 +1,4 @@
+// Toasts.tsx
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { useMediaQuery } from '../hooks/useMediaQuery'
@@ -39,8 +40,14 @@ const StyledToast = styled.div`
     inherits: false;
   }
   @keyframes toast-appear {
-    0% { opacity: 0; --fade-in: 100%; }
-    100% { opacity: 1; --fade-in: 0%; }
+    0% {
+      opacity: 0;
+      --fade-in: 100%;
+    }
+    100% {
+      opacity: 1;
+      --fade-in: 0%;
+    }
   }
   background: #fffffff0;
   color: black;
@@ -53,7 +60,7 @@ const StyledToast = styled.div`
   cursor: pointer;
   padding: 10px;
 
-  animation: toast-appear .2s;
+  animation: toast-appear 0.2s;
 
   width: 100%;
 
@@ -73,8 +80,12 @@ const StyledToast = styled.div`
 
 const StyledTimer = styled.div<{$ticking: boolean}>`
   @keyframes yesyes {
-    0% { width: 100%;}
-    100% { width: 0%;}
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0%;
+    }
   }
   width: 100%;
   height: 5px;
@@ -83,10 +94,12 @@ const StyledTimer = styled.div<{$ticking: boolean}>`
   position: relative;
   overflow: hidden;
   &:after {
-    ${(props) => props.$ticking && css`
-      animation: yesyes linear 10s;
-    `}
-    content: " ";
+    ${(props) =>
+      props.$ticking &&
+      css`
+        animation: yesyes linear 10s;
+      `}
+    content: ' ';
     position: absolute;
     border-radius: 10px;
     left: 0;
@@ -97,25 +110,30 @@ const StyledTimer = styled.div<{$ticking: boolean}>`
   }
 `
 
-function Toast({ toast }: {toast: TToast}) {
-  const timeout = React.useRef<NodeJS.Timer>()
+function Toast({ toast }: { toast: TToast }) {
+  const timeout = React.useRef<ReturnType<typeof setTimeout> | null>(null)
   const discard = useToastStore((state) => state.discard)
   const [ticking, setTicking] = React.useState(true)
 
-  React.useLayoutEffect(
-    () => {
-      timeout.current = setTimeout(() => {
-        discard(toast.id)
-      }, 10000)
-      return () => clearTimeout(timeout.current)
-    },
-    [toast.id],
-  )
+  React.useLayoutEffect(() => {
+    timeout.current = setTimeout(() => {
+      discard(toast.id)
+    }, 10000)
+
+    return () => {
+      if (timeout.current) {
+        clearTimeout(timeout.current)
+      }
+    }
+  }, [toast.id])
 
   const pauseTimer = () => {
     setTicking(false)
-    clearTimeout(timeout.current)
+    if (timeout.current) {
+      clearTimeout(timeout.current)
+    }
   }
+
   const resumeTimer = () => {
     setTicking(true)
     timeout.current = setTimeout(() => {
@@ -146,12 +164,10 @@ export default function Toasts() {
 
   return (
     <StyledToasts>
-      {visible.map((toast, i) => (
+      {visible.map((toast) => (
         <Toast toast={toast} key={toast.id} />
       ))}
-      {!showAll && toasts.length > 1 && (
-        <StackedToast />
-      )}
+      {!showAll && toasts.length > 1 && <StackedToast />}
     </StyledToasts>
   )
 }
