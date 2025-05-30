@@ -47,8 +47,8 @@ const StyledHeader = styled.div`
 `
 
 const Logo = styled(NavLink)`
-  height: 35px;
-  margin: 0 15px;
+  height: 24px;
+  margin: 0 10px;
   & > img {
     height: 120%;
   }
@@ -116,10 +116,12 @@ export default function Header() {
       )}
 
       <StyledHeader>
-        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '1px', alignItems: 'center' }}>
           <Logo to="/">
-            <img alt="Gamba logo" src="/logo.svg" />
+            <img alt="Swytch logo" src="/logo.png" />
+            
           </Logo>
+          <h2>SWYTCH</h2>
         </div>
 
         <div

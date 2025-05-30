@@ -56,7 +56,7 @@ export default function App() {
     <>
       {newcomer && (
         <Modal>
-          <h1>Welcome</h1>
+          <h1>Welcome to SWYTCH</h1>
           <TosWrapper>
             <TosInner dangerouslySetInnerHTML={{ __html: TOS_HTML }} />
           </TosWrapper>

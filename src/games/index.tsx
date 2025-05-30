@@ -1,3 +1,4 @@
+import { Text } from '@react-three/drei'
 import { GameBundle } from 'gamba-react-ui-v2'
 import React from 'react'
 
@@ -58,7 +59,7 @@ export const GAMES: GameBundle[] = [
       `,
       background: '#ff4f4f',
     },
-    props: { logo: '/logo.svg' },
+    props: { logo: '/logo.png' },
     app: React.lazy(() => import('./HiLo')),
   },
   {

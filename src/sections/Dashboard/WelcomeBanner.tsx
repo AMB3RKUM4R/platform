@@ -115,19 +115,19 @@ export function WelcomeBanner() {
   return (
     <Welcome>
       <div>
-        <h1>Welcome to Gamba v2 👋</h1>
+        <h1>Welcome to Swytch Ecoverse 👋</h1>
         <p>
-          A fair, simple and decentralized casino on Solana.
+         We are a Collective of unified yet sovereign human beings who are seeking a sustainable ecosphere of freedom and empowerment. Swytch features the following comprehensive ecosystem to empower you, create efficiency in your financial and personal empowerment journey and educate you on remembering the autonomous and brilliant being you are
         </p>
       </div>
       <Buttons>
         <button onClick={copyInvite}>
           💸 Copy Invite
         </button>
-        <button onClick={() => window.open('https://v2.gamba.so/', '_blank')}>
+        <button onClick={() => window.open('https://www.swytchpet.io', '_blank')}>
           🚀 Add Liquidity
         </button>
-        <button onClick={() => window.open('https://discord.gg/HSTtFFwR', '_blank')}>
+        <button onClick={() => window.open('https://discord.gg', '_blank')}>
           💬 Discord
         </button>
       </Buttons>
